@@ -6,7 +6,7 @@ const router = express.Router();
 const moduleRoute = [
   {
     path: "/v1/auth/",
-    route: ,
+    route: UserRoutes,
   }
 ];
 moduleRoute.forEach((route) => {
