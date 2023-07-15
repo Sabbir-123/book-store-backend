@@ -16,10 +16,6 @@ const createUser = async (user: IUser): Promise<IUser | null> => {
   // auto generated incremental id
   const id = await generateUseId(user.role);
   user.id = id;
-
- 
-  
-
   const createdUser = await User.create(user);
   if (!createdUser) {
     throw new ApiError("Failed to create User", 400);
@@ -82,9 +78,9 @@ const refreshTokenService = async (
     throw new ApiError("Invalid Refresh Token", httpStatus.FORBIDDEN);
   }
   //check user exist
-  const { userPhoneNumber } = verifiedToken;
+  const { userEmail } = verifiedToken;
   const user = new User();
-  const isUserExist = await user.isUserExist(userPhoneNumber);
+  const isUserExist = await user.isUserExist(userEmail);
   if (!isUserExist) {
     throw new ApiError("user not found", httpStatus.NOT_FOUND);
   }

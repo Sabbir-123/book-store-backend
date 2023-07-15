@@ -2,11 +2,13 @@ import { z } from "zod";
 
 const createUserZodSchema = z.object({
   body: z.object({
-    user: z.object({
+    user:z.object({
       role: z.string({
         required_error: "Role is required",
       }),
-      password: z.string().optional(),
+      password: z.string({
+        required_error: "Password is required",
+      }),
       name: z.object({
         firstName: z.string({
           required_error: "First name is required",
@@ -15,58 +17,21 @@ const createUserZodSchema = z.object({
           required_error: "Last name is required",
         }),
       }),
-      phoneNumber: z.string({
-        required_error: "Phone number is required",
+      email: z.string({
+        required_error: "Email is required",
       }),
       address: z.string({
         required_error: "Address is required",
       }),
       money: z.string().optional(),
-
-    }),
+    })
   }),
 });
 
-const updateCowHutUserZodSchema = z.object({
-  body: z.object({
-    role: z
-      .string({
-        required_error: "Role is required",
-      })
-      .optional(),
-    password: z.string().optional(),
-    name: z
-      .object({
-        firstName: z
-          .string({
-            required_error: "First name is required",
-          })
-          .optional(),
-        lastName: z
-          .string({
-            required_error: "Last name is required",
-          })
-          .optional(),
-      })
-      .optional(),
-    phoneNumber: z
-      .string({
-        required_error: "Phone number is required",
-      })
-      .optional(),
-    address: z
-      .string({
-        required_error: "Address is required",
-      })
-      .optional(),
-    budget: z.string().optional(),
-    income: z.string().optional(),
-  }),
-});
 
 const loginZodSchema = z.object({
   body: z.object({
-    phoneNumber: z.string({
+    email: z.string({
       required_error: "phoneNumber is required",
     }),
     password: z.string({
@@ -85,7 +50,6 @@ const refreshTokenZodSchema = z.object({
 
 export const UserValidation = {
   createUserZodSchema,
-  updateCowHutUserZodSchema,
   loginZodSchema,
   refreshTokenZodSchema,
 };

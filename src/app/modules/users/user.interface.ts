@@ -12,8 +12,7 @@ export type IUser = {
   };
   email: string;
   address: string;
-  budget: number;
-  income: number;
+  money: number;
 };
 
 export type IUserMethods = {

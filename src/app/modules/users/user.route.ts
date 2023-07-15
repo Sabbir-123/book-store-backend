@@ -7,19 +7,19 @@ import { UserValidation } from "./user.validation";
 const router = express.Router();
 
 router.post(
-  "/auth/signup",
+  "/signup",
   validateRequest(UserValidation?.createUserZodSchema),
   UserController.creatrUser
 );
 //login
 router.post(
-  "/auth/login",
+  "/login",
   validateRequest(UserValidation.loginZodSchema),
   UserController.loginUser
 );
 //refreshToken
 router.post(
-  "/auth/refresh-token",
+  "/refresh-token",
   validateRequest(UserValidation.refreshTokenZodSchema),
   UserController.refreshToken
 );

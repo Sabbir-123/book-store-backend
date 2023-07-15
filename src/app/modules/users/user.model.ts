@@ -18,6 +18,7 @@ const userSchema = new Schema<IUser, Record<string, never>, IUserMethods>(
     },
     role: {
       type: String,
+      required: true,
     },
     name: {
       firstName: {
@@ -38,14 +39,9 @@ const userSchema = new Schema<IUser, Record<string, never>, IUserMethods>(
       type: String,
       required: true,
     },
-    budget: {
-      type: Number,
-      required: true,
-    },
-    income: {
-      type: Number,
-      required: true,
-    },
+    money: {
+      type: Number
+    }
   },
   {
     timestamps: true,
