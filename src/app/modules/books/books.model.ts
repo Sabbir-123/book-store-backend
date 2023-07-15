@@ -7,25 +7,26 @@ const BookSchema = new Schema<IBooks>({
     author: { type: [String], required: true },
     genre: { type: String, required: true },
     publicationYear: { type: Number, required: true },
-    publisher: {
-      name: { type: String, required: true },
-      location: { type: String, required: true },
-    },
     reviews: {
       type: [
         {
-          _id: { type: String, required: true },
-          user: { type: String, required: true },
-          comment: { type: String, required: true },
+          _id: { type: String, required: false },
+          user: { type: String, required: false },
+          comment: { type: String, required: false },
         },
       ],
-      required: true,
+      required: false,
     },
-    rating: { type: Number, required: true },
-    price: { type: Schema.Types.Mixed, required: true },
-    featured: { type: String, required: true },
+    email: { type: String, required: false },
+    rating: { type: Number, required: false },
+    price: { type: Number, required: true },
+    featured: { type: String, required: false }, // Make featured field optional with required: false
+    wishlist: { type: [String], required: false }, // Add wishlist field as an array of strings with required: false
+    coverImage: { type: String, required: false }, // Add coverImage field as a string with required: false
+    currentlyReading: { type: String, required: false }, // Add currentlyReading field as a string with required: false
+    finishedBooks: { type: [String], required: false }, // Add finishedBooks field as a string with required: false
   });
-
+  
 
   const BooksL = model<IBooks, BookModel>("Books", BookSchema);
   export default BooksL

@@ -5,19 +5,21 @@ export type IBooks = {
     author: string[];
     genre: string;
     publicationYear: number;
-    publisher: {
-      name: string;
-      location: string;
-    };
-    reviews: {
+    reviews?: {
       _id: string;
       user: string;
       comment: string;
     }[];
-    rating: number;
-    price: string | number;
+    rating?: number;
+    price:  number;
     featured?: string;
-  } & Document
+    email?: string;
+    wishlist?: string[];
+    coverImage?: string;
+    currentlyReading?:string;
+    finishedBooks?:string[];
+
+  } 
   
   export type BookModel = Model<IBooks, Record<string, unknown>>;
 

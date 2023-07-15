@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 // application
 app.get("env");
 
-app.use("/api/", routes);
+app.use("/api/v1/", routes);
 
 // global error handler
 app.use(globalErrorHandler);
