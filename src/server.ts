@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-undef */
 import { Server } from "http";
 import mongoose from "mongoose";
