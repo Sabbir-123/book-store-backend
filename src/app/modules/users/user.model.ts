@@ -3,8 +3,7 @@ import { Schema, model } from "mongoose";
 import { IUser, IUserMethods, UserModel } from "./user.interface";
 import bcrypt from "bcrypt";
 import config from "../../../config";
-// import ApiError from "../../../error/ApiError";
-// import httpStatus from "http-status";
+
 
 const userSchema = new Schema<IUser, Record<string, never>, IUserMethods>(
   {
@@ -19,7 +18,6 @@ const userSchema = new Schema<IUser, Record<string, never>, IUserMethods>(
     },
     role: {
       type: String,
-      required: true,
     },
     name: {
       firstName: {
@@ -31,7 +29,7 @@ const userSchema = new Schema<IUser, Record<string, never>, IUserMethods>(
         required: true,
       },
     },
-    phoneNumber: {
+    email: {
       type: String,
       required: true,
       unique: true,
@@ -53,20 +51,20 @@ const userSchema = new Schema<IUser, Record<string, never>, IUserMethods>(
     timestamps: true,
     toJSON: {
       virtuals: true,
-      transform: function (doc, ret) {
-        delete ret["password"];
-        return ret;
-      },
+      // transform: function (doc, ret) {
+      //   delete ret["password"];
+      //   return ret;
+      // },
     },
   }
 );
 
 userSchema.methods.isUserExist = async function (
-  phoneNumber: string
+  email: string
 ): Promise<Partial<IUser> | null> {
   const user = await User.findOne(
-    { phoneNumber },
-    { phoneNumber: 1, password: 1, role: 1 }
+    { email },
+    { email: 1, password: 1, role: 1 }
   );
   return user;
 };
@@ -89,16 +87,6 @@ userSchema.methods.isPasswordMatched = async function (
   return isMatched;
 };
 
-// userSchema.pre('save', async function (next) {
-//   const user = this;
-//   const existingUser = await User.findOne({ phoneNumber: user.phoneNumber });
 
-//   if (existingUser) {
-//     throw new ApiError('Phone number already registered.', httpStatus.FORBIDDEN);
-
-//   }
-
-//   next();
-// });
 
 export const User = model<IUser, UserModel>("User", userSchema);

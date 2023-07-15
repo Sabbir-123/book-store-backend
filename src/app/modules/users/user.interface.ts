@@ -1,5 +1,7 @@
 import { Model } from "mongoose";
 
+
+
 export type IUser = {
   id: string;
   password: string;
@@ -8,7 +10,7 @@ export type IUser = {
     firstName: string;
     lastName: string;
   };
-  phoneNumber: string;
+  email: string;
   address: string;
   budget: number;
   income: number;
@@ -24,6 +26,22 @@ export type IUserMethods = {
 
 export type UserModel = Model<IUser, Record<string, unknown>, IUserMethods>;
 
-export type ICowHutFilter = {
+export type IUserFilter = {
   searchTerm?: string;
+};
+
+
+export type ILoginUser = {
+  email: string;
+  password: string;
+  role: string;
+};
+
+export type ILoginUserResponse = {
+  accessToken: string;
+  refreshToken?: string;
+};
+
+export type IRefreshTokenResponse = {
+  accessToken: string;
 };

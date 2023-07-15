@@ -10,9 +10,6 @@ export const findLastUserId = async () => {
 };
 
 export const generateUseId = async (role: string) => {
-  const lastSellerId = await User.findOne({ role: "seller" }, { id: 1 })
-    .sort({ id: -1 })
-    .lean();
   const lastBuyerId = await User.findOne({ role: "buyer" }, { id: 1 })
     .sort({ id: -1 })
     .lean();
@@ -23,9 +20,6 @@ export const generateUseId = async (role: string) => {
   if (role === "buyer") {
     prefix = "B";
     currentId = lastBuyerId ? parseInt(lastBuyerId.id.slice(1)) : 0;
-  } else if (role === "seller") {
-    prefix = "S";
-    currentId = lastSellerId ? parseInt(lastSellerId.id.slice(1)) : 0;
   } else {
     throw new Error("Invalid user role");
   }
