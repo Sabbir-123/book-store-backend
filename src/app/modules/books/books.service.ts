@@ -81,9 +81,34 @@ const getAllBooks = async (
   };
 
 
-  export const Bookervice = {
+  const getSingleBook = async (id: string): Promise<IBooks | null> => {
+    const result = await BooksL.findById(id);
+    return result;
+  };
+  
+  const updateSingleBook = async (
+    id: string,
+    payload: Partial<IBooks>
+  ): Promise<IBooks | null> => {
+    const result = await BooksL.findOneAndUpdate({ _id: id }, payload, {
+      new: true,
+    });
+    return result;
+  };
+  
+  const deleteBook = async (id: string): Promise<IBooks | null> => {
+    const result = await BooksL.findOneAndDelete({ _id: id });
+    return result;
+  };
+
+
+
+  export const BookService = {
     createBook,
     getAllBooks,
+    getSingleBook,
+    updateSingleBook,
+    deleteBook
     
   };
   

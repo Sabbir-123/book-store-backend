@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
-import { Schema, model } from "mongoose";
-import { IUser, IUserMethods, UserModel } from "./user.interface";
-import bcrypt from "bcrypt";
-import config from "../../../config";
-
+import { Schema, model } from 'mongoose'
+import { IUser, IUserMethods, UserModel } from './user.interface'
+import bcrypt from 'bcrypt'
+import config from '../../../config'
 
 const userSchema = new Schema<IUser, Record<string, never>, IUserMethods>(
   {
@@ -40,8 +39,12 @@ const userSchema = new Schema<IUser, Record<string, never>, IUserMethods>(
       required: true,
     },
     money: {
-      type: Number
-    }
+      type: Number,
+    },
+    wishlist: [{ type: Schema.Types.ObjectId, ref: 'Book' }], // Add wishlist field as an array of strings with required: false
+
+    currentlyReading: { type: String, required: false }, // Add currentlyReading field as a string with required: false
+    finishedBooks: { type: [String], required: false },
   },
   {
     timestamps: true,
@@ -52,37 +55,32 @@ const userSchema = new Schema<IUser, Record<string, never>, IUserMethods>(
       //   return ret;
       // },
     },
-  }
-);
+  },
+)
 
 userSchema.methods.isUserExist = async function (
-  email: string
+  email: string,
 ): Promise<Partial<IUser> | null> {
-  const user = await User.findOne(
-    { email },
-    { email: 1, password: 1, role: 1 }
-  );
-  return user;
-};
+  const user = await User.findOne({ email }, { email: 1, password: 1, role: 1 })
+  return user
+}
 
-userSchema.pre("save", async function (next) {
-  const user = this;
+userSchema.pre('save', async function (next) {
+  const user = this
   //hashing user password
   user.password = await bcrypt.hash(
     user.password,
-    Number(config.bcrypt_salt_rounds)
-  );
-  next();
-});
+    Number(config.bcrypt_salt_rounds),
+  )
+  next()
+})
 
 userSchema.methods.isPasswordMatched = async function (
   givenPassword: string,
-  savedPassword: string
+  savedPassword: string,
 ): Promise<boolean> {
-  const isMatched = await bcrypt.compare(givenPassword, savedPassword);
-  return isMatched;
-};
+  const isMatched = await bcrypt.compare(givenPassword, savedPassword)
+  return isMatched
+}
 
-
-
-export const User = model<IUser, UserModel>("User", userSchema);
+export const User = model<IUser, UserModel>('User', userSchema)

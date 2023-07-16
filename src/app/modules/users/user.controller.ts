@@ -5,8 +5,12 @@ import sendResponse from '../../../shared/sendResponse'
 import { UserService } from './user.service'
 
 import config from '../../../config'
-import { ILoginUserResponse, IRefreshTokenResponse } from './user.interface'
+import { ILoginUserResponse, IRefreshTokenResponse, IUser } from './user.interface'
 import { generateUseId } from './user.util'
+import { BookService } from '../books/books.service'
+import { IBooks } from '../books/books.interface'
+import { jwtHelpers } from '../../../helpers/jwtHelpers'
+import { Secret } from 'jsonwebtoken'
 
 const creatrUser = catchAsync(async (req: Request, res: Response) => {
   const { user } = req.body
@@ -76,8 +80,22 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+
+// const enlistWishlist =catchAsync(async (req: Request, res: Response) =>  {
+//   const bookId = req.params.id;
+//   const userId = req?.user?.id; 
+//     const result = await UserService.enlistWishlist(bookId, userId);
+//   sendResponse(res, {
+//     success: true,
+//     statusCode: httpStatus.OK,
+//     message: "Book Wishlisted Successfully",
+//     data: result,
+//   })}
+// ) 
+
 export const UserController = {
   creatrUser,
   loginUser,
   refreshToken,
+  // enlistWishlist
 }

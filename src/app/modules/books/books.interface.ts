@@ -14,10 +14,8 @@ export type IBooks = {
     price:  number;
     featured?: string;
     email?: string;
-    wishlist?: string[];
     coverImage?: string;
-    currentlyReading?:string;
-    finishedBooks?:string[];
+    
 
   } 
   

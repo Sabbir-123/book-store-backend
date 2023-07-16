@@ -23,6 +23,12 @@ router.post(
   validateRequest(UserValidation.refreshTokenZodSchema),
   UserController.refreshToken
 );
+// router.post(
+//   "/wishlist",
+//   UserController.enlistWishlist
+// );
+
+
 
 
 export const UserRoutes = router;

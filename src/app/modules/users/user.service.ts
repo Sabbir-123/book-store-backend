@@ -11,6 +11,7 @@ import { generateUseId } from "./user.util";
 import httpStatus from "http-status";
 import { jwtHelpers } from "../../../helpers/jwtHelpers";
 import { Secret } from "jsonwebtoken";
+import BooksL from "../books/books.model";
 
 const createUser = async (user: IUser): Promise<IUser | null> => {
   // auto generated incremental id
@@ -98,8 +99,32 @@ const refreshTokenService = async (
 
 
 
+
+// const enlistWishlist = async (bookId: string, userId: string) => {
+//   try {
+//     // Update the user's wishlist array
+//     const updatedUser = await User.findByIdAndUpdate(
+//       userId,
+//       { $addToSet: { wishlist: bookId } },
+//       { new: true }
+//     );
+
+//     // Update the book's wishlist array
+//     const updatedBook = await BooksL.findByIdAndUpdate(
+//       bookId,
+//       { $addToSet: { wishlist: userId } },
+//       { new: true }
+//     );
+
+//     return { user: updatedUser, book: updatedBook };
+//   } catch (error) {
+//     throw new Error('Failed to add to wishlist');
+//   }
+// };
 export const UserService = {
   createUser,
   loginUser,
-  refreshTokenService
+  refreshTokenService,
+  // setWishlistedBooks,
+  // enlistWishlist
 };

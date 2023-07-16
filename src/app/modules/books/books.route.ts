@@ -19,20 +19,23 @@ router.get(
   
   booksController.getAllbooks
 );
-// router.patch(
-//   "/books/:id",
-//   validateRequest(bookValidation?.updatebookZodSchema),
+router.patch(
+  "/book/:id",
+  validateRequest(BookValidation?.updateBookZodSchema),
 
-//   booksController.updatebook
-// );
-// router.delete(
-//   "/books/:id",
-//   booksController.deleteSinglebook
-// );
-// router.get(
-//   "/books/:id",
+  booksController.updateBook
+);
 
-//   booksController.getSinglebook
-// );
+
+
+router.delete(
+  "/book/:id",
+  booksController.deleteSingleBook
+);
+router.get(
+  "/book/:id",
+
+  booksController.getSinglebook
+);
 
 export const BookRoutes = router;

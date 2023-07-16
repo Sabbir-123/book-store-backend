@@ -13,6 +13,9 @@ export type IUser = {
   email: string;
   address: string;
   money: number;
+  wishlist?: string[];
+  currentlyReading?:string;
+  finishedBooks?:string[];
 };
 
 export type IUserMethods = {

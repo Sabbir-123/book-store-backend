@@ -21,10 +21,8 @@ const BookSchema = new Schema<IBooks>({
     rating: { type: Number, required: false },
     price: { type: Number, required: true },
     featured: { type: String, required: false }, // Make featured field optional with required: false
-    wishlist: { type: [String], required: false }, // Add wishlist field as an array of strings with required: false
     coverImage: { type: String, required: false }, // Add coverImage field as a string with required: false
-    currentlyReading: { type: String, required: false }, // Add currentlyReading field as a string with required: false
-    finishedBooks: { type: [String], required: false }, // Add finishedBooks field as a string with required: false
+
   });
   
 
