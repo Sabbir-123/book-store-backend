@@ -8,31 +8,23 @@ import { paginationFields } from '../../../constants/Paginationconstants'
 import { bookStoreBookFilterableFields } from './books.constant'
 import { IBooks } from './books.interface'
 import { BookService } from './books.service'
-import { jwtHelpers } from '../../../helpers/jwtHelpers'
-import config from '../../../config'
-import { Secret } from 'jsonwebtoken'
+
 
 const createbook = catchAsync(async (req: Request, res: Response) => {
-  const { title, author, genre, price, publicationYear ,coverImage,reviews } = req.body
-  const accessToken = req.headers.authorization
-
-  if (accessToken) {
-    const decodedToken = jwtHelpers.verifyToken(
-      accessToken,
-      config.jwt.secret as Secret,
-    )
-    const { userEmail: email } = decodedToken
+  const { title, author, genre, price, publicationYear ,coverImage ,email} = req.body
+ 
+ 
 
     // Create a new Book object
     const newBook = {
+      email,
       title,
       author,
       genre,
       publicationYear,
       coverImage,
-      price,
-      email,
-      reviews
+      price
+      
     }
     console.log(newBook)
     // Call the BookService createBook function with the new Book object
@@ -44,7 +36,7 @@ const createbook = catchAsync(async (req: Request, res: Response) => {
       message: 'Book created successfully',
       data: result,
     })
-  }
+  
 })
 
 const getAllbooks = catchAsync(async (req: Request, res: Response) => {

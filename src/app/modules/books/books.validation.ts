@@ -5,7 +5,7 @@ const createBookZodSchema = z.object({
     title: z.string({
       required_error: 'Title is required',
     }),
-    author: z.array(z.string()).nonempty({
+    author: z.string().nonempty({
       message: 'Author is required',
     }),
     genre: z.string({
@@ -14,6 +14,7 @@ const createBookZodSchema = z.object({
     publicationYear: z.number({
       required_error: 'Publication year is required',
     }),
+    coverImage: z.string(),
 
     reviews: z
       .array(
@@ -44,7 +45,7 @@ const createBookZodSchema = z.object({
     }),
     featured: z.string().optional(),
     email: z.string().optional(),
-    coverImage: z.string().optional(),
+
   }),
 })
 

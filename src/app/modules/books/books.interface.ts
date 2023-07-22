@@ -2,7 +2,7 @@ import { Model } from "mongoose";
 
 export type IBooks = {
     title: string;
-    author: string[];
+    author: string;
     genre: string;
     publicationYear: number;
     reviews?: {
@@ -14,7 +14,7 @@ export type IBooks = {
     price:  number;
     featured?: string;
     email?: string;
-    coverImage?: string;
+    coverImage: string;
     
 
   } 

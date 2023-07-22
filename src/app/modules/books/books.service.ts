@@ -76,7 +76,7 @@ const getAllBooks = async (
     if (!createdBook) {
       throw new ApiError("Failed to create Book", 400);
     }
-    console.log(createdBook)
+  
     return createdBook;
   };
 
