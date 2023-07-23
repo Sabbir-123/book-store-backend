@@ -66,11 +66,22 @@ const getSinglebook = catchAsync(async (req: Request, res: Response) => {
     });
   });
 
+  const getReview = catchAsync(async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const result = await BookService.getReview(id);
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      data: result,
+    });
+  });
+  
 
 
   const updateBook = catchAsync(async (req: Request, res: Response) => {
     const id = req.params.id;
     const updatedData = req.body;
+    console.log(updatedData)
     const result = await BookService.updateSingleBook(id, updatedData);
     sendResponse<IBooks>(res, {
       statusCode: httpStatus.OK,
@@ -91,7 +102,21 @@ const getSinglebook = catchAsync(async (req: Request, res: Response) => {
     });
   }); 
 
+  const createReview = catchAsync(async (req, res) => {
+    const comment = req.body.comment;
+    const bookId = req.params.id;
 
+    console.log( req.body,req.params.id );
+  
+    const result = await BookService.createReview(bookId, comment); 
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Review Posted Successfully",
+      data: result,
+    });
+  });
+  
 
 
 export const booksController = {
@@ -99,5 +124,7 @@ export const booksController = {
   createbook,
   getSinglebook,
   updateBook,
-  deleteSingleBook
+  deleteSingleBook,
+  createReview,
+  getReview
 }

@@ -1,41 +1,41 @@
-import express from "express";
+import express from 'express'
 
-import { booksController } from "./books.controller";
-import validateRequest from "../../middlewares/validateRequest";
-import { BookValidation } from "./books.validation";
+import { booksController } from './books.controller'
+import validateRequest from '../../middlewares/validateRequest'
+import { BookValidation } from './books.validation'
 
-
-const router = express.Router();
+const router = express.Router()
 
 router.post(
-  "/new-book",
+  '/new-book',
   validateRequest(BookValidation?.createBookZodSchema),
 
-  booksController.createbook
-);
+  booksController.createbook,
+)
+router.post('/new-review/:id', booksController.createReview)
 
 router.get(
-  "/all-books",
-  
-  booksController.getAllbooks
-);
+  '/all-books',
+
+  booksController.getAllbooks,
+)
 router.patch(
-  "/book/:id",
+  '/book/:id',
   validateRequest(BookValidation?.updateBookZodSchema),
 
-  booksController.updateBook
-);
+  booksController.updateBook,
+)
 
-
-
-router.delete(
-  "/book/:id",
-  booksController.deleteSingleBook
-);
+router.delete('/book/:id', booksController.deleteSingleBook)
 router.get(
-  "/book/:id",
+  '/book/:id',
 
-  booksController.getSinglebook
-);
+  booksController.getSinglebook,
+)
+router.get(
+  '/book/review/:id',
 
-export const BookRoutes = router;
+  booksController.getReview
+)
+
+export const BookRoutes = router

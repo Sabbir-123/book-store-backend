@@ -7,17 +7,8 @@ const BookSchema = new Schema<IBooks>(
     title: { type: String, required: true },
     author: { type: String, required: true },
     genre: { type: String, required: true },
-    publicationYear: { type: Number, required: true },
-    reviews: {
-      type: [
-        {
-          _id: { type: String, required: false },
-          user: { type: String, required: false },
-          comment: { type: String, required: false },
-        },
-      ],
-      required: false,
-    },
+    publicationYear: { type: Number , required: true },
+    reviews: { type: [String], required: false },
     email: { type: String, required: false },
     rating: { type: Number, required: false },
     price: { type: Number, required: true },
