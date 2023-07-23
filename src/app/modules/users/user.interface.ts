@@ -15,7 +15,7 @@ export type IUser = {
   address: string;
   money: number;
   wishlist?: string[];
-  currentlyReading?:string;
+  currentlyReading?:string[];
   finishedBooks?:string[];
 };
 

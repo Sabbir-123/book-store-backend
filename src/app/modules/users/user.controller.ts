@@ -7,6 +7,7 @@ import { UserService } from './user.service'
 import config from '../../../config'
 import { ILoginUserResponse, IRefreshTokenResponse, } from './user.interface'
 import { generateUseId } from './user.util'
+import { jwtHelpers } from '../../../helpers/jwtHelpers'
 // import { BookService } from '../books/books.service'
 // import { IBooks } from '../books/books.interface'
 // import { jwtHelpers } from '../../../helpers/jwtHelpers'
@@ -81,21 +82,25 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
 })
 
 
-// const enlistWishlist =catchAsync(async (req: Request, res: Response) =>  {
-//   const bookId = req.params.id;
-//   const userId = req?.user?.id; 
-//     const result = await UserService.enlistWishlist(bookId, userId);
-//   sendResponse(res, {
-//     success: true,
-//     statusCode: httpStatus.OK,
-//     message: "Book Wishlisted Successfully",
-//     data: result,
-//   })}
-// ) 
+const enlistWishlist =catchAsync(async (req: Request, res: Response) =>  {
+  const bookId = req.body.id;
+  const accessToken = req.headers.authorization?.split(" ")[0];
+  const decodedToken = jwtHelpers.decodeToken(accessToken as string);
+  const { userEmail } = decodedToken;
+  console.log(decodedToken)
+   
+    const result = await UserService.enlistWishlist(bookId, userEmail);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Book Wishlisted Successfully",
+    data: result,
+  })}
+) 
 
 export const UserController = {
   creatrUser,
   loginUser,
   refreshToken,
-  // enlistWishlist
+  enlistWishlist
 }

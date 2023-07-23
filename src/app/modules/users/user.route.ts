@@ -23,10 +23,10 @@ router.post(
   validateRequest(UserValidation.refreshTokenZodSchema),
   UserController.refreshToken
 );
-// router.post(
-//   "/wishlist",
-//   UserController.enlistWishlist
-// );
+router.post(
+  "/wishlist/",
+  UserController.enlistWishlist
+);
 
 
 
